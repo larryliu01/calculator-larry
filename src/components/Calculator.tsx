@@ -1,9 +1,6 @@
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { calculateResult } from "@/utils/calculatorUtils";
-import { X, Delete, Divide, Plus, Minus, Equal } from "lucide-react";
 import { toast } from "sonner";
 
 const Calculator = () => {
@@ -90,109 +87,99 @@ const Calculator = () => {
   };
 
   return (
-    <Card className="w-80 shadow-lg">
-      <CardContent className="p-4">
-        <div className="bg-gray-50 p-4 rounded-md mb-4 text-right h-16 flex items-center justify-end overflow-hidden">
-          <span className="text-2xl font-mono text-gray-800 truncate">{display}</span>
-        </div>
-        
-        <div className="grid grid-cols-4 gap-2">
-          <Button 
-            onClick={handleClear} 
-            variant="destructive" 
-            className="col-span-2"
-          >
-            <X className="mr-1 h-4 w-4" /> Clear
-          </Button>
-          <Button 
-            onClick={handleDelete} 
-            variant="secondary"
-            className="col-span-2"
-          >
-            <Delete className="mr-1 h-4 w-4" /> Delete
-          </Button>
+    <div className="calculator-container border rounded-lg shadow-lg w-80 bg-white">
+      <div className="calculator-display bg-gray-50 p-4 rounded-t-lg mb-4 text-right h-16 flex items-center justify-end overflow-hidden border-b">
+        <span className="text-2xl font-mono text-gray-800 truncate">{display}</span>
+      </div>
+      
+      <div className="calculator-keypad p-4 grid grid-cols-4 gap-2">
+        <button 
+          onClick={handleClear} 
+          className="col-span-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded flex items-center justify-center"
+        >
+          <span>Clear</span>
+        </button>
+        <button 
+          onClick={handleDelete} 
+          className="col-span-2 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded flex items-center justify-center"
+        >
+          <span>Delete</span>
+        </button>
 
-          {[7, 8, 9].map((num) => (
-            <Button
-              key={num}
-              onClick={() => handleNumberClick(num.toString())}
-              variant="outline"
-              className="bg-white hover:bg-gray-100"
-            >
-              {num}
-            </Button>
-          ))}
-          <Button 
-            onClick={() => handleOperatorClick("divide")} 
-            variant="secondary"
+        {[7, 8, 9].map((num) => (
+          <button
+            key={num}
+            onClick={() => handleNumberClick(num.toString())}
+            className="bg-white hover:bg-gray-100 border border-gray-300 text-gray-800 py-2 px-4 rounded"
           >
-            <Divide className="h-4 w-4" />
-          </Button>
+            {num}
+          </button>
+        ))}
+        <button 
+          onClick={() => handleOperatorClick("divide")} 
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded"
+        >
+          ÷
+        </button>
 
-          {[4, 5, 6].map((num) => (
-            <Button
-              key={num}
-              onClick={() => handleNumberClick(num.toString())}
-              variant="outline"
-              className="bg-white hover:bg-gray-100"
-            >
-              {num}
-            </Button>
-          ))}
-          <Button 
-            onClick={() => handleOperatorClick("multiply")} 
-            variant="secondary"
+        {[4, 5, 6].map((num) => (
+          <button
+            key={num}
+            onClick={() => handleNumberClick(num.toString())}
+            className="bg-white hover:bg-gray-100 border border-gray-300 text-gray-800 py-2 px-4 rounded"
           >
-            <X className="h-4 w-4" />
-          </Button>
+            {num}
+          </button>
+        ))}
+        <button 
+          onClick={() => handleOperatorClick("multiply")} 
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded"
+        >
+          ×
+        </button>
 
-          {[1, 2, 3].map((num) => (
-            <Button
-              key={num}
-              onClick={() => handleNumberClick(num.toString())}
-              variant="outline"
-              className="bg-white hover:bg-gray-100"
-            >
-              {num}
-            </Button>
-          ))}
-          <Button 
-            onClick={() => handleOperatorClick("subtract")} 
-            variant="secondary"
+        {[1, 2, 3].map((num) => (
+          <button
+            key={num}
+            onClick={() => handleNumberClick(num.toString())}
+            className="bg-white hover:bg-gray-100 border border-gray-300 text-gray-800 py-2 px-4 rounded"
           >
-            <Minus className="h-4 w-4" />
-          </Button>
+            {num}
+          </button>
+        ))}
+        <button 
+          onClick={() => handleOperatorClick("subtract")} 
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded"
+        >
+          −
+        </button>
 
-          <Button
-            onClick={() => handleNumberClick("0")}
-            variant="outline"
-            className="bg-white hover:bg-gray-100"
-          >
-            0
-          </Button>
-          <Button
-            onClick={handleDecimalClick}
-            variant="outline"
-            className="bg-white hover:bg-gray-100"
-          >
-            .
-          </Button>
-          <Button 
-            onClick={handleEqualsClick} 
-            variant="default"
-            className="bg-blue-500 hover:bg-blue-600"
-          >
-            <Equal className="h-4 w-4" />
-          </Button>
-          <Button 
-            onClick={() => handleOperatorClick("add")} 
-            variant="secondary"
-          >
-            <Plus className="h-4 w-4" />
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+        <button
+          onClick={() => handleNumberClick("0")}
+          className="bg-white hover:bg-gray-100 border border-gray-300 text-gray-800 py-2 px-4 rounded"
+        >
+          0
+        </button>
+        <button
+          onClick={handleDecimalClick}
+          className="bg-white hover:bg-gray-100 border border-gray-300 text-gray-800 py-2 px-4 rounded"
+        >
+          .
+        </button>
+        <button 
+          onClick={handleEqualsClick} 
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+        >
+          =
+        </button>
+        <button 
+          onClick={() => handleOperatorClick("add")} 
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded"
+        >
+          +
+        </button>
+      </div>
+    </div>
   );
 };
 
